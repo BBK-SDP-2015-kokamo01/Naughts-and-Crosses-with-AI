@@ -79,4 +79,21 @@ class BoardSpec extends FlatSpec with Matchers with MockitoSugar {
 
     board.isWinner(p1) should be (true)
   }
+
+  "A board" should "return true if the board is full" in {
+    val p1 = mock[Player]
+    board.set((0,0), p1)
+    board.set((0,1), p1)
+    board.set((0,2), p1)
+
+    board.set((1,0), p1)
+    board.set((1,1), p1)
+    board.set((1,2), p1)
+
+    board.set((2,0), p1)
+    board.set((2,1), p1)
+    board.set((2,2), p1)
+
+    board.isFull should be (true)
+  }
 }

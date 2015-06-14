@@ -11,6 +11,9 @@ class Board(size: Int) {
   def isWinner(player: Player): Boolean =
     checkRows(player) || checkColumn(player) || checkRightDiagonal(player) || checkLeftDiagonal(player)
 
+  def isFull: Boolean =
+    board.forall(!_.contains(null))
+
   private def checkRows(player: Player): Boolean =
     board.map(row => row.count(_ == player)).contains(size)
 
