@@ -8,20 +8,20 @@ class Board(size: Int) {
     board(coordinate._1)(coordinate._2) = player
   }
 
-  def getWinner: Option[Player] = ???
+  def isWinner(player: Player): Boolean =
+    checkRows(player) || checkColumn(player) || checkRightDiagonal(player) || checkLeftDiagonal(player)
 
-  //  {
-  //    board.map(row => row.zipWithIndex)
-  //
-  //  }
+  private def checkRows(player: Player): Boolean =
+    board.map(row => row.count(_ == player)).contains(size)
 
-  def checkRows: Boolean = board.map(row => row.count(_ != null)).contains(size)
+  private def checkColumn(player: Player): Boolean =
+    board.transpose.map(col => col.count(_ == player)).contains(size)
 
-  def checkColumn: Boolean = board.transpose.map(col => col.count(_ != null)).contains(size)
+  private def checkRightDiagonal(player: Player): Boolean =
+    (0 until size).count(index => board(index)(index) == player) == size
 
-  def checkRightDiagonal: Boolean = {
-    board.
-  }
+  private def checkLeftDiagonal(player: Player): Boolean =
+    (0 until size).count(index => board(index)((size - 1) - index) == player) == size
 }
 
 object Board {
